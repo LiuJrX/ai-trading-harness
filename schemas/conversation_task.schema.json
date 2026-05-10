@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stock-review-harness.local/schemas/conversation_task.schema.json",
+  "title": "ConversationTask",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_id",
+    "conversation_id",
+    "user_message",
+    "task_type",
+    "status",
+    "trading_level",
+    "created_at",
+    "required_context",
+    "output_contract"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "pattern": "^task_[a-z0-9_:-]+$"
+    },
+    "conversation_id": {
+      "type": "string",
+      "pattern": "^conv_[a-z0-9_:-]+$"
+    },
+    "user_message": {
+      "type": "string",
+      "minLength": 1
+    },
+    "task_type": {
+      "type": "string",
+      "enum": [
+        "create_premarket_plan",
+        "add_strategy_note",
+        "review_trade",
+        "review_day",
+        "propose_strategy_update",
+        "assess_intraday_setup",
+        "prepare_order_intent",
+        "query_strategy",
+        "query_state"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "created",
+        "context_compiled",
+        "running",
+        "waiting_for_user",
+        "completed",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "trading_level": {
+      "type": "string",
+      "enum": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L4",
+        "L5"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "required_context": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "market_snapshot",
+          "active_strategy_cards",
+          "risk_rules",
+          "premarket_plan",
+          "position_state",
+          "trade_records",
+          "postmarket_reviews",
+          "source_documents",
+          "strategy_versions"
+        ]
+      }
+    },
+    "output_contract": {
+      "type": "string",
+      "enum": [
+        "premarket_plan",
+        "strategy_update_request",
+        "postmarket_review",
+        "intraday_assessment",
+        "order_intent",
+        "plain_answer"
+      ]
+    },
+    "context_pack_id": {
+      "type": "string"
+    },
+    "result_ref": {
+      "type": "string"
+    },
+    "error": {
+      "type": "string"
+    }
+  }
+}

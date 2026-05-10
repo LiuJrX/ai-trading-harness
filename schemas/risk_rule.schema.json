@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stock-review-harness.local/schemas/risk_rule.schema.json",
+  "title": "RiskRule",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "risk_rule_id",
+    "name",
+    "priority",
+    "status",
+    "conditions",
+    "effects"
+  ],
+  "properties": {
+    "risk_rule_id": {
+      "type": "string",
+      "pattern": "^rr_[a-z0-9_:-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "info",
+        "warning",
+        "high",
+        "critical"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "active",
+        "watching",
+        "pending_human_review",
+        "deprecated"
+      ]
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "effects": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "block_strategy",
+          "reduce_position",
+          "require_human_confirmation",
+          "switch_to_observation_only",
+          "disable_order_intent",
+          "raise_warning"
+        ]
+      }
+    },
+    "affected_strategy_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_insight_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

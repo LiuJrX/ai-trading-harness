@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stock-review-harness.local/schemas/order_intent.schema.json",
+  "title": "OrderIntent",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "order_intent_id",
+    "source_conversation_id",
+    "strategy_id",
+    "symbol",
+    "side",
+    "intent_type",
+    "conditions",
+    "position_limit",
+    "risk_gate_status",
+    "approval_status",
+    "execution_status"
+  ],
+  "properties": {
+    "order_intent_id": {
+      "type": "string",
+      "pattern": "^oi_[a-z0-9_:-]+$"
+    },
+    "source_conversation_id": {
+      "type": "string"
+    },
+    "strategy_id": {
+      "type": "string"
+    },
+    "symbol": {
+      "type": "string"
+    },
+    "side": {
+      "type": "string",
+      "enum": [
+        "buy",
+        "sell"
+      ]
+    },
+    "intent_type": {
+      "type": "string",
+      "enum": [
+        "conditional_entry",
+        "conditional_exit",
+        "risk_exit",
+        "manual_review_only"
+      ]
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "position_limit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_position_pct"
+      ],
+      "properties": {
+        "max_position_pct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "invalid_when": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risk_gate_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "passed",
+        "blocked",
+        "warning"
+      ]
+    },
+    "approval_status": {
+      "type": "string",
+      "enum": [
+        "not_required",
+        "required",
+        "approved",
+        "rejected",
+        "expired"
+      ]
+    },
+    "execution_status": {
+      "type": "string",
+      "enum": [
+        "not_submitted",
+        "submitted",
+        "filled",
+        "partially_filled",
+        "cancelled",
+        "failed"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

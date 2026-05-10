@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stock-review-harness.local/schemas/strategy_card.schema.json",
+  "title": "StrategyCard",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "strategy_id",
+    "version",
+    "name",
+    "category",
+    "status",
+    "core_thesis",
+    "enabled_regimes",
+    "disabled_regimes",
+    "setup_conditions",
+    "trigger_conditions",
+    "avoid_conditions",
+    "risk_controls",
+    "evidence"
+  ],
+  "properties": {
+    "strategy_id": {
+      "type": "string",
+      "pattern": "^st_[a-z0-9_:-]+$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "leader_strategy",
+        "breakout_strategy",
+        "rebound_strategy",
+        "first_board_trial",
+        "theme_rotation",
+        "risk_control",
+        "custom"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "active",
+        "watching",
+        "pending_human_review",
+        "deprecated",
+        "rejected"
+      ]
+    },
+    "core_thesis": {
+      "type": "string"
+    },
+    "enabled_regimes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "disabled_regimes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "setup_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "trigger_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "avoid_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risk_controls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "position_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "max_position_pct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "insight_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "case_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "update_request_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "proposal_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "human_review_required": {
+          "type": "boolean"
+        },
+        "reviewed_by": {
+          "type": "string"
+        },
+        "reviewed_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

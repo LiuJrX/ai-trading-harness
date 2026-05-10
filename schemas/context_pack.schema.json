@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stock-review-harness.local/schemas/context_pack.schema.json",
+  "title": "ContextPack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "context_pack_id",
+    "task_id",
+    "task_type",
+    "trading_level",
+    "compiled_at",
+    "loaded",
+    "guardrails"
+  ],
+  "properties": {
+    "context_pack_id": {
+      "type": "string",
+      "pattern": "^cp_[a-z0-9_:-]+$"
+    },
+    "task_id": {
+      "type": "string"
+    },
+    "task_type": {
+      "type": "string"
+    },
+    "trading_level": {
+      "type": "string",
+      "enum": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L4",
+        "L5"
+      ]
+    },
+    "compiled_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "market_regime": {
+      "type": "string"
+    },
+    "loaded": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "principle_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "strategy_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "risk_rule_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "failure_pattern_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "guardrails": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "allow_real_order",
+        "requires_human_confirmation"
+      ],
+      "properties": {
+        "allow_real_order": {
+          "type": "boolean"
+        },
+        "requires_human_confirmation": {
+          "type": "boolean"
+        },
+        "forbidden_actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "evidence_policy": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stock-review-harness.local/schemas/postmarket_review.schema.json",
+  "title": "PostmarketReview",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "review_id",
+    "trade_date",
+    "created_at",
+    "market_summary",
+    "plan_review",
+    "attribution",
+    "strategy_implications"
+  ],
+  "properties": {
+    "review_id": {
+      "type": "string",
+      "pattern": "^pmr_[a-z0-9_:-]+$"
+    },
+    "trade_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "premarket_plan_id": {
+      "type": "string"
+    },
+    "trade_record_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "market_summary": {
+      "type": "string"
+    },
+    "plan_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "was_plan_followed",
+        "notes"
+      ],
+      "properties": {
+        "was_plan_followed": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "attribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary_type",
+        "explanation"
+      ],
+      "properties": {
+        "primary_type": {
+          "type": "string",
+          "enum": [
+            "strategy_error",
+            "execution_error",
+            "environment_error",
+            "random_noise",
+            "no_trade"
+          ]
+        },
+        "explanation": {
+          "type": "string"
+        }
+      }
+    },
+    "strategy_implications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "target_asset_id",
+          "suggested_action",
+          "reason"
+        ],
+        "properties": {
+          "target_asset_id": {
+            "type": "string"
+          },
+          "suggested_action": {
+            "type": "string",
+            "enum": [
+              "keep",
+              "watch",
+              "tighten",
+              "loosen",
+              "deprecate",
+              "create_new_rule"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "next_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

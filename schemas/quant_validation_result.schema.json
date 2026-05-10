@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stock-review-harness.local/schemas/quant_validation_result.schema.json",
+  "title": "QuantValidationResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "validation_id",
+    "target_asset_id",
+    "validation_type",
+    "sample",
+    "metrics",
+    "conclusion",
+    "status"
+  ],
+  "properties": {
+    "validation_id": {
+      "type": "string",
+      "pattern": "^qvr_[a-z0-9_:-]+$"
+    },
+    "target_asset_id": {
+      "type": "string"
+    },
+    "validation_type": {
+      "type": "string",
+      "enum": [
+        "condition_replay",
+        "paper_trade_simulation",
+        "historical_sample_review",
+        "risk_filter_test",
+        "regime_comparison"
+      ]
+    },
+    "hypothesis": {
+      "type": "string"
+    },
+    "sample": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start_date",
+        "end_date",
+        "sample_size"
+      ],
+      "properties": {
+        "start_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "end_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "sample_size": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "filters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "win_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "avg_return_pct": {
+          "type": "number"
+        },
+        "max_drawdown_pct": {
+          "type": "number"
+        },
+        "profit_loss_ratio": {
+          "type": "number"
+        },
+        "trigger_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "conclusion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "summary",
+        "confidence"
+      ],
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "recommended_action": {
+          "type": "string",
+          "enum": [
+            "keep",
+            "watch",
+            "tighten",
+            "loosen",
+            "deprecate",
+            "needs_more_samples"
+          ]
+        }
+      }
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "reviewed",
+        "accepted",
+        "rejected",
+        "archived"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

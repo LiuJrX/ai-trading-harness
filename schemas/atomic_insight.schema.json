@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stock-review-harness.local/schemas/atomic_insight.schema.json",
+  "title": "AtomicInsight",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "insight_id",
+    "source_id",
+    "type",
+    "normalized_claim",
+    "status",
+    "confidence"
+  ],
+  "properties": {
+    "insight_id": {
+      "type": "string",
+      "pattern": "^ai_[a-z0-9_:-]+$"
+    },
+    "source_id": {
+      "type": "string"
+    },
+    "section_id": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "market_mechanism",
+        "entry_rule",
+        "exit_rule",
+        "risk_rule",
+        "position_rule",
+        "regime_rule",
+        "failure_pattern",
+        "term_definition",
+        "strategy_revision",
+        "execution_discipline"
+      ]
+    },
+    "topics": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "raw_quote": {
+      "type": "string"
+    },
+    "normalized_claim": {
+      "type": "string",
+      "minLength": 1
+    },
+    "applies_when": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "does_not_apply_when": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_links": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "related_asset_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "needs_human_review",
+        "reviewed",
+        "promoted",
+        "rejected",
+        "deprecated"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

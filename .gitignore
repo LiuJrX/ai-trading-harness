@@ -1,4 +1,10 @@
 # Byte-compiled / optimized / DLL files
+.DS_Store
+
+# Private trading notes and raw personal review assets
+daily_review_files/
+data/raw/
+
 __pycache__/
 *.py[codz]
 *$py.class

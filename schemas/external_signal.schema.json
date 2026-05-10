@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stock-review-harness.local/schemas/external_signal.schema.json",
+  "title": "ExternalSignal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "signal_id",
+    "source_type",
+    "source_name",
+    "trade_date",
+    "observation",
+    "signal_kind",
+    "confidence",
+    "status"
+  ],
+  "properties": {
+    "signal_id": {
+      "type": "string",
+      "pattern": "^sig_[a-z0-9_:-]+$"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "market_data",
+        "sentiment_tool",
+        "news",
+        "announcement",
+        "capital_flow",
+        "leaderboard",
+        "manual_observation",
+        "quant_tool"
+      ]
+    },
+    "source_name": {
+      "type": "string"
+    },
+    "trade_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "related_symbol": {
+      "type": "string"
+    },
+    "related_theme": {
+      "type": "string"
+    },
+    "observation": {
+      "type": "string"
+    },
+    "interpretation": {
+      "type": "string"
+    },
+    "signal_kind": {
+      "type": "string",
+      "enum": [
+        "fact",
+        "interpretation",
+        "hypothesis"
+      ]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "usable_for": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "market_snapshot",
+          "theme_observation",
+          "risk_warning",
+          "strategy_validation",
+          "postmarket_review"
+        ]
+      }
+    },
+    "not_allowed_for": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "direct_order_execution",
+          "strategy_auto_update",
+          "risk_override"
+        ]
+      }
+    },
+    "raw_source_ref": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "raw",
+        "normalized",
+        "reviewed",
+        "rejected",
+        "archived"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
