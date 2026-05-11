@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://stock-review-harness.local/schemas/source_document.schema.json",
+  "$id": "https://ai-trading-harness.local/schemas/source_document.schema.json",
   "title": "SourceDocument",
   "type": "object",
   "additionalProperties": false,

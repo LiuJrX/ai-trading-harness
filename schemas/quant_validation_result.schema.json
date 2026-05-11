@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://stock-review-harness.local/schemas/quant_validation_result.schema.json",
+  "$id": "https://ai-trading-harness.local/schemas/quant_validation_result.schema.json",
   "title": "QuantValidationResult",
   "type": "object",
   "additionalProperties": false,

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://stock-review-harness.local/schemas/atomic_insight.schema.json",
+  "$id": "https://ai-trading-harness.local/schemas/atomic_insight.schema.json",
   "title": "AtomicInsight",
   "type": "object",
   "additionalProperties": false,

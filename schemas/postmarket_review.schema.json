@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://stock-review-harness.local/schemas/postmarket_review.schema.json",
+  "$id": "https://ai-trading-harness.local/schemas/postmarket_review.schema.json",
   "title": "PostmarketReview",
   "type": "object",
   "additionalProperties": false,
